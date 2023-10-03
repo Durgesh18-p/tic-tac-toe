@@ -1,6 +1,9 @@
 let boxes = document.getElementsByClassName("box")
 const reset = document.getElementById('reset')
 let turn = "X"
+let zeroCount = 0
+let Xcount = 0
+
 
 // Function to change the turn
 const changeTurn = ()=>{
@@ -23,7 +26,9 @@ const checkWin = ()=>{
     ]
     wins.forEach((e) =>{
         if((boxes[e[0]].innerText === boxes[e[1]].textContent) && (boxes[e[2]].innerText === boxes[e[1]].innerText) && (boxes[e[0]].innerText !== '')){
-            document.querySelector('.game-info').innerText = boxes[e[0]].innerText + " won";
+            document.querySelector('#result').innerText = boxes[e[0]].innerText + " won";
+            // document.getElementById("info")[0].textContent = "";
+            
         }
     })
 }
@@ -36,7 +41,8 @@ Array.from(boxes).forEach(element =>{
                 element.innerText = turn
                 turn = changeTurn();
                 checkWin()
-                document.getElementsByClassName("info")[0].innerText = "Turn for " + turn
+                document.querySelector(".info").innerText = "Turn for " + turn;
+                
             }
 
            
@@ -44,5 +50,7 @@ Array.from(boxes).forEach(element =>{
 })
 
 reset.addEventListener('click',function(){
-    boxes.innerText = ''
+    Array.from(boxes).forEach(e =>{
+        e.innerText = ''
+    })
 })
